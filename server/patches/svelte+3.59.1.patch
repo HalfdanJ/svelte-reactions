@@ -7,6 +7,16 @@ index f7badbd..a766b14 100644
 \ No newline at end of file
 +export { compile, parse, preprocess, walk, VERSION, Component} from './types/compiler/index';
 \ No newline at end of file
+diff --git a/node_modules/svelte/compiler.js b/node_modules/svelte/compiler.js
+index e942a4b..30aaa2f 100644
+--- a/node_modules/svelte/compiler.js
++++ b/node_modules/svelte/compiler.js
+@@ -41512,4 +41512,5 @@ exports.compile = compile;
+ exports.parse = parse$a;
+ exports.preprocess = preprocess;
+ exports.walk = walk;
++exports.Component = Component;
+ //# sourceMappingURL=compiler.js.map
 diff --git a/node_modules/svelte/compiler.mjs b/node_modules/svelte/compiler.mjs
 index 8e46a47..4c068da 100644
 --- a/node_modules/svelte/compiler.mjs

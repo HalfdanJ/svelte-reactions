@@ -18,8 +18,11 @@ import {
   MarkupKind,
   Hover,
 } from "vscode-languageserver/node";
+import { SvelteHoverInfo } from "./shared/types";
 
-import { TextDocument } from "vscode-languageserver-textdocument";
+import { Position, TextDocument } from "vscode-languageserver-textdocument";
+import { analyze, getPositionInfo } from "./svelteAnalyzer";
+import { Component } from "svelte/compiler";
 
 // Create a connection for the server, using Node's IPC as a transport.
 // Also include all preview / proposed LSP features.
@@ -143,54 +146,58 @@ documents.onDidClose((e) => {
 documents.onDidChangeContent((change) => {
   validateTextDocument(change.document);
   connection.console.log("We received an file change event");
-  console.log(change);
+  analyze(change.document.getText());
 });
+
+const documentComponents = new Map<string, Component | undefined>();
 
 async function validateTextDocument(textDocument: TextDocument): Promise<void> {
   // In this simple example we get the settings for every validate run.
   const settings = await getDocumentSettings(textDocument.uri);
 
-  // The validator creates diagnostics for all uppercase words length 2 and more
-  const text = textDocument.getText();
-  const pattern = /\b[A-Z]{2,}\b/g;
-  let m: RegExpExecArray | null;
+  // // The validator creates diagnostics for all uppercase words length 2 and more
+  // const text = textDocument.getText();
+  // const pattern = /\b[A-Z]{2,}\b/g;
+  // let m: RegExpExecArray | null;
+  const component = analyze(textDocument.getText());
+  documentComponents.set(textDocument.uri, component);
 
-  let problems = 0;
-  const diagnostics: Diagnostic[] = [];
-  while ((m = pattern.exec(text)) && problems < settings.maxNumberOfProblems) {
-    problems++;
-    const diagnostic: Diagnostic = {
-      severity: DiagnosticSeverity.Warning,
-      range: {
-        start: textDocument.positionAt(m.index),
-        end: textDocument.positionAt(m.index + m[0].length),
-      },
-      message: `${m[0]} is all uppercase.`,
-      source: "ex",
-    };
-    if (hasDiagnosticRelatedInformationCapability) {
-      diagnostic.relatedInformation = [
-        {
-          location: {
-            uri: textDocument.uri,
-            range: Object.assign({}, diagnostic.range),
-          },
-          message: "Spelling matters",
-        },
-        {
-          location: {
-            uri: textDocument.uri,
-            range: Object.assign({}, diagnostic.range),
-          },
-          message: "Particularly for names",
-        },
-      ];
-    }
-    diagnostics.push(diagnostic);
-  }
+  // let problems = 0;
+  // const diagnostics: Diagnostic[] = [];
+  // while ((m = pattern.exec(text)) && problems < settings.maxNumberOfProblems) {
+  //   problems++;
+  //   const diagnostic: Diagnostic = {
+  //     severity: DiagnosticSeverity.Warning,
+  //     range: {
+  //       start: textDocument.positionAt(m.index),
+  //       end: textDocument.positionAt(m.index + m[0].length),
+  //     },
+  //     message: `${m[0]} is all uppercase.`,
+  //     source: "ex",
+  //   };
+  //   if (hasDiagnosticRelatedInformationCapability) {
+  //     diagnostic.relatedInformation = [
+  //       {
+  //         location: {
+  //           uri: textDocument.uri,
+  //           range: Object.assign({}, diagnostic.range),
+  //         },
+  //         message: "Spelling matters",
+  //       },
+  //       {
+  //         location: {
+  //           uri: textDocument.uri,
+  //           range: Object.assign({}, diagnostic.range),
+  //         },
+  //         message: "Particularly for names",
+  //       },
+  //     ];
+  //   }
+  //   diagnostics.push(diagnostic);
+  // }
 
-  // Send the computed diagnostics to VSCode.
-  connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
+  // // Send the computed diagnostics to VSCode.
+  // connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
 }
 
 connection.onDidChangeWatchedFiles((_change) => {
@@ -200,15 +207,36 @@ connection.onDidChangeWatchedFiles((_change) => {
 });
 
 connection.onHover(
-  (_textDocumentPosition: TextDocumentPositionParams): Hover => {
+  (_textDocumentPosition: TextDocumentPositionParams): Hover | null => {
     connection.console.log("On hover");
+    console.log(_textDocumentPosition.position);
 
-    return {
-      contents: {
-        kind: MarkupKind.Markdown,
-        value: `# Hello **world**!`,
-      },
-    };
+    const component = documentComponents.get(
+      _textDocumentPosition.textDocument.uri
+    );
+    if (!component) {
+      return null;
+    }
+
+    // connection.sendRequest()
+    const info = getPositionInfo(component, _textDocumentPosition.position);
+    console.log(info);
+    return info;
+  }
+);
+
+connection.onRequest(
+  "svelteReactions/getHoverInfo",
+  (args: { uri: string; position: Position }) => {
+    console.log("Requesting component", args.uri);
+    const component = documentComponents.get(args.uri);
+    if (!component) {
+      console.log("Document not found");
+      return null;
+    }
+    const info = getPositionInfo(component, args.position);
+    console.log(info);
+    return info;
   }
 );
 
