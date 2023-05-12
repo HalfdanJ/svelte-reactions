@@ -12,8 +12,15 @@
     "url": "https://github.com/Microsoft/vscode-extension-samples"
   },
   "dependencies": {
+    "estree-walker": "^3.0.3",
+    "magic-string": "^0.30.0",
+    "patch-package": "^7.0.0",
+    "periscopic": "^3.1.0",
+    "svelte": "^3.59.1",
     "vscode-languageserver": "^8.1.0",
     "vscode-languageserver-textdocument": "^1.0.8"
   },
-  "scripts": {}
+  "scripts": {
+    "postinstall": "patch-package"
+  }
 }

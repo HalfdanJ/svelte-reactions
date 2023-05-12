@@ -1,0 +1,42 @@
+diff --git a/node_modules/svelte/compiler.d.ts b/node_modules/svelte/compiler.d.ts
+index f7badbd..a766b14 100644
+--- a/node_modules/svelte/compiler.d.ts
++++ b/node_modules/svelte/compiler.d.ts
+@@ -1 +1 @@
+-export { compile, parse, preprocess, walk, VERSION } from './types/compiler/index';
+\ No newline at end of file
++export { compile, parse, preprocess, walk, VERSION, Component} from './types/compiler/index';
+\ No newline at end of file
+diff --git a/node_modules/svelte/compiler.mjs b/node_modules/svelte/compiler.mjs
+index 8e46a47..4c068da 100644
+--- a/node_modules/svelte/compiler.mjs
++++ b/node_modules/svelte/compiler.mjs
+@@ -41501,5 +41501,5 @@ async function preprocess(
+ const VERSION = '3.59.1';
+ // additional exports added through generate-type-definitions.js
+ 
+-export { VERSION, compile, parse$a as parse, preprocess, walk };
++export { VERSION, compile, parse$a as parse, preprocess, walk, Component };
+ //# sourceMappingURL=compiler.mjs.map
+diff --git a/node_modules/svelte/types/compiler/compile/index.d.ts b/node_modules/svelte/types/compiler/compile/index.d.ts
+index d5764b0..59fe921 100644
+--- a/node_modules/svelte/types/compiler/compile/index.d.ts
++++ b/node_modules/svelte/types/compiler/compile/index.d.ts
+@@ -11,3 +11,4 @@ export default function compile(source: string, options?: CompileOptions): {
+         };
+     };
+ };
++
+diff --git a/node_modules/svelte/types/compiler/index.d.ts b/node_modules/svelte/types/compiler/index.d.ts
+index 76e3ff7..ce64e40 100644
+--- a/node_modules/svelte/types/compiler/index.d.ts
++++ b/node_modules/svelte/types/compiler/index.d.ts
+@@ -2,6 +2,7 @@ export { default as compile } from './compile/index';
+ export { default as parse } from './parse/index';
+ export { default as preprocess } from './preprocess/index';
+ export { walk } from 'estree-walker';
++export { default as Component } from './compile/Component'
+ export declare const VERSION: string;
+ 
+ export { CompileOptions, ModuleFormat, EnableSourcemap, CssHashGetter } from "./interfaces"
+\ No newline at end of file
