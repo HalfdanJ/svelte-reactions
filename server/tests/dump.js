@@ -724,11 +724,11 @@ Component {
     }
   ],
   aliases: Map(0) {},
-  used_names: Set(1) { '$' },
+  used_names: Set(1) { 'MyComponent' },
   globally_used_names: Set(0) {},
   slots: Map(0) {},
   slot_outlets: Set(0) {},
-  name: { type: 'Identifier', name: '$' },
+  name: { type: 'Identifier', name: 'MyComponent' },
   stats: {},
   warnings: [],
   ast: {
@@ -958,7 +958,7 @@ Component {
     '{parent1}\n' +
     '\n' +
     '<span><span>{parent2.toLocaleLowerCase()}</span></span>\n',
-  compile_options: {},
+  compile_options: { name: 'MyComponent' },
   original_ast: {
     html: {
       start: 98,
@@ -1476,7 +1476,7 @@ Component {
     namespace: undefined
   },
   namespace: undefined,
-  tag: '',
+  tag: 'MyComponent',
   ignores: undefined,
   instance_scope: Scope {
     parent: null,

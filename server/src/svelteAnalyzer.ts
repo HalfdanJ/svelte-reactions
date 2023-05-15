@@ -1,36 +1,24 @@
 import { Component, parse } from "svelte/compiler";
-import { CompileOptions, walk } from "svelte/types/compiler";
 import { Hover, MarkupKind, Position, Range } from "vscode-languageserver";
 import * as fs from "fs";
 import * as util from "util";
+import { ITranspiledSvelteDocument } from "svelte-language-server/dist/src/plugins/svelte/SvelteDocument";
+import { Node } from "estree";
+import { CompileOptions } from "svelte/types/compiler";
+import { INode } from "svelte/types/compiler/compile/nodes/interfaces";
+import Fragment from "svelte/types/compiler/compile/nodes/Fragment";
 
 export function analyze(source: string) {
-  // console.time("analyze");
-  const options: CompileOptions = {
-    name: "MyComponent",
-  };
+  const options: CompileOptions = {};
   try {
     const ast = parse(source, options);
-    const component = new Component(
-      ast,
-      source,
-      options.name || "",
-      options,
-      {} as any,
-      []
-    );
-    // component.generate();
-    // fs.writeFileSync("../dump.js", util.inspect(component, { depth: null }));
+    const component = new Component(ast, source, "", options, {} as any, []);
+    fs.writeFileSync("../dump.js", util.inspect(component, { depth: null }));
     return component;
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     return undefined;
   }
-  // component.generate();
-
-  // console.dir(component, { depth: null });
-
-  // console.timeEnd("analyze");
 }
 
 function isPositionInSourceLocation(
@@ -56,8 +44,8 @@ type ReactiveDeclaration =
   (typeof Component.prototype.reactive_declarations)[0];
 
 type Annotation = {
-  name: string;
   range: Range;
+  $range?: Range;
 };
 
 function rangeFromNodePositions(node: any) {
@@ -73,17 +61,19 @@ function rangeFromNodePositions(node: any) {
   };
 }
 
-function findDependents(name: string, component: Component): Annotation[] {
-  if (!component.var_lookup.get(name)?.is_reactive_dependency) return [];
+function findDependents(name: string, component: Component): Node[] {
+  if (
+    !component.var_lookup.get(name)?.referenced_from_script &&
+    !component.var_lookup.get(name)?.is_reactive_dependency
+  )
+    return [];
 
-  const directDependents = component.reactive_declarations.filter((rd) =>
-    rd.dependencies.has(name)
+  const directDependents = component.reactive_declarations.filter(
+    (rd) => rd.dependencies.has(name) || rd.dependencies.has(`$${name}`)
   );
+
   return [
-    ...directDependents.map((dd) => ({
-      name: [...dd.assignees.values()].join(", "),
-      range: rangeFromNodePositions(dd.node),
-    })),
+    ...directDependents.map((dd) => dd.node),
     ...directDependents
       .flatMap((dd) => [...dd.assignees.values()])
       .filter((n) => n != name)
@@ -94,8 +84,7 @@ function findDependents(name: string, component: Component): Annotation[] {
 function findDepencies(
   decl: ReactiveDeclaration,
   component: Component
-): Annotation[] {
-  // return [];
+): Node[] {
   const dependencyNames = [...decl.dependencies.values()];
   const reactiveDeclarationAssignments = dependencyNames
     .flatMap((dep) =>
@@ -110,18 +99,9 @@ function findDepencies(
     }))
     .filter((nd) => nd.node);
 
-  const res = reactiveDeclarationAssignments.map((dd) => ({
-    name: [...dd.assignees.values()].join(", "),
-    range: rangeFromNodePositions(dd.node),
-  }));
-
+  const res = reactiveDeclarationAssignments.map((dd) => dd.node);
   if (nodeDeclarations) {
-    res.push(
-      ...nodeDeclarations.map((nd) => ({
-        name: nd.name,
-        range: rangeFromNodePositions(nd.node),
-      }))
-    );
+    res.push(...nodeDeclarations.map((nd) => nd.node).filter(notEmpty));
   }
 
   res.push(
@@ -133,44 +113,103 @@ function findDepencies(
   return res;
 }
 
+function transformAnnotationPosition(
+  range: Annotation["range"],
+  transpiledSvelteDocument: ITranspiledSvelteDocument
+) {
+  return {
+    start: transpiledSvelteDocument.getOriginalPosition(range.start),
+    end: transpiledSvelteDocument.getOriginalPosition(range.end),
+  };
+}
+
+function annotationFromNode(
+  node: Node,
+  transpiledSvelteDocument: ITranspiledSvelteDocument
+): Annotation {
+  return {
+    range: transformAnnotationPosition(
+      rangeFromNodePositions(node),
+      transpiledSvelteDocument
+    ),
+    $range:
+      node.type === "LabeledStatement" && node.label.name === "$"
+        ? transformAnnotationPosition(
+            rangeFromNodePositions(node.label),
+            transpiledSvelteDocument
+          )
+        : undefined,
+  };
+}
+
 export function getPositionInfo(
   component: Component,
-  position: Position
+  position: Position,
+  transpiledSvelteDocument: ITranspiledSvelteDocument
 ): {
   contents: Hover["contents"];
   dependents: Annotation[];
   dependencies: Annotation[];
 } | null {
+  // Convert the position to the position in the transpiled document
+  const transpiledPosition =
+    transpiledSvelteDocument.getGeneratedPosition(position);
+
   const dependentDeclarations: Annotation[] = [];
   const dependencyDeclarations: Annotation[] = [];
 
+  // Find declaration node for the position
   const declarationNode = component.vars.find((v) => {
     const dec = component.node_for_declaration.get(v.name);
-    return dec?.loc && isPositionInSourceLocation(position, dec.loc);
+    return dec?.loc && isPositionInSourceLocation(transpiledPosition, dec.loc);
   });
 
+  const touchedNames: string[] = [];
+
+  // Find all nodes that depend on the current node
   if (declarationNode) {
-    dependentDeclarations.push(
-      ...findDependents(declarationNode.name, component)
-    );
+    touchedNames.push(declarationNode.name);
   }
 
+  // Find the reactive declaration for the current position
   const reactiveDeclaration = component.reactive_declarations.find(
-    (rd) => rd.node.loc && isPositionInSourceLocation(position, rd.node.loc)
+    (rd) =>
+      rd.node.loc && isPositionInSourceLocation(transpiledPosition, rd.node.loc)
   );
 
   if (reactiveDeclaration) {
+    // Find all dependencies of the reactive declaration
     dependencyDeclarations.push(
-      ...findDepencies(reactiveDeclaration, component)
+      ...findDepencies(reactiveDeclaration, component).map((node) =>
+        annotationFromNode(node, transpiledSvelteDocument)
+      )
     );
 
+    // Find all other reactive declarations that depend
     const assignees = [...reactiveDeclaration.assignees.values()];
-    dependentDeclarations.push(
-      ...assignees.flatMap((a) => findDependents(a, component))
-    );
+    touchedNames.push(...assignees);
   }
 
-  // console.log(dependentDeclarations);
+  // walk(component.fragment as any, (node) => {
+  //   const inode = node as unknown as INode;
+  //   if (inode.type === "MustacheTag") {
+  //     if (
+  //       touchedNames.some((name) => inode.expression?.dependencies?.has(name))
+  //     ) {
+  //       console.log(node);
+  //       //     console.log(inode);
+  //     }
+  //   }
+  // });
+
+  for (const name of touchedNames) {
+    console.log(name);
+    dependentDeclarations.push(
+      ...findDependents(name, component).map((node) =>
+        annotationFromNode(node, transpiledSvelteDocument)
+      )
+    );
+  }
 
   return {
     contents: {
@@ -180,19 +219,16 @@ export function getPositionInfo(
     dependents: dependentDeclarations,
     dependencies: dependencyDeclarations,
   };
-
-  // range: node.loc
-  //   ? {
-  //       start: {
-  //         line: node.loc.start.line - 1,
-  //         character: node.loc.start.column,
-  //       },
-  //       end: {
-  //         line: node.loc.end.line - 1,
-  //         character: node.loc.end.column,
-  //       },
-  //     }
-  // : undefined,
-
-  // walk(component., {)
 }
+
+function notEmpty<TValue>(value: TValue | null | undefined): value is TValue {
+  return value !== null && value !== undefined;
+}
+
+// function walk(node: INode, callback: (node: INode) => void) {
+//   callback(node);
+//   const casted = node as unknown as Fragment;
+//   if (casted.children) {
+//     casted.children.forEach((node) => walk(node, callback));
+//   }
+// }

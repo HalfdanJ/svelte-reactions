@@ -1,13 +1,11 @@
 import { Hover, Range } from "vscode";
 
+export interface Annotation {
+  range: Range;
+}
+
 export type SvelteHoverInfo = {
   contents: Hover["contents"];
-  dependents: {
-    name: string;
-    range: Range;
-  }[];
-  dependencies: {
-    name: string;
-    range: Range;
-  }[];
+  dependents: Annotation[];
+  dependencies: Annotation[];
 } | null;

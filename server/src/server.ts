@@ -1,28 +1,24 @@
-/* --------------------------------------------------------------------------------------------
- * Copyright (c) Microsoft Corporation. All rights reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- * ------------------------------------------------------------------------------------------ */
 import {
-  createConnection,
-  TextDocuments,
-  Diagnostic,
-  DiagnosticSeverity,
-  ProposedFeatures,
-  InitializeParams,
   DidChangeConfigurationNotification,
-  CompletionItem,
-  CompletionItemKind,
-  TextDocumentPositionParams,
-  TextDocumentSyncKind,
+  InitializeParams,
   InitializeResult,
-  MarkupKind,
-  Hover,
+  ProposedFeatures,
+  TextDocumentSyncKind,
+  TextDocuments,
+  createConnection,
 } from "vscode-languageserver/node";
-import { SvelteHoverInfo } from "./shared/types";
 
+import {
+  Document,
+  DocumentManager,
+} from "svelte-language-server/dist/src/lib/documents";
+import {
+  ITranspiledSvelteDocument,
+  SvelteDocument,
+} from "svelte-language-server/dist/src/plugins/svelte/SvelteDocument";
+import { Component } from "svelte/compiler";
 import { Position, TextDocument } from "vscode-languageserver-textdocument";
 import { analyze, getPositionInfo } from "./svelteAnalyzer";
-import { Component } from "svelte/compiler";
 
 // Create a connection for the server, using Node's IPC as a transport.
 // Also include all preview / proposed LSP features.
@@ -33,8 +29,21 @@ const documents: TextDocuments<TextDocument> = new TextDocuments(TextDocument);
 
 let hasConfigurationCapability = false;
 let hasWorkspaceFolderCapability = false;
-let hasDiagnosticRelatedInformationCapability = false;
-let hasHoverProvider = false;
+
+const docManager = new DocumentManager(
+  (textDocument) => new Document(textDocument.uri, textDocument.text)
+);
+
+const svelteDocManager = new WeakMap<Document, SvelteDocument>();
+
+function getSvelteDocument(document: Document) {
+  let svelteDoc = svelteDocManager.get(document);
+  if (!svelteDoc || svelteDoc.version !== document.version) {
+    svelteDoc = new SvelteDocument(document);
+    svelteDocManager.set(document, svelteDoc);
+  }
+  return svelteDoc;
+}
 
 connection.onInitialize((params: InitializeParams) => {
   const capabilities = params.capabilities;
@@ -47,24 +56,15 @@ connection.onInitialize((params: InitializeParams) => {
   hasWorkspaceFolderCapability = !!(
     capabilities.workspace && !!capabilities.workspace.workspaceFolders
   );
-  hasDiagnosticRelatedInformationCapability = !!(
-    capabilities.textDocument &&
-    capabilities.textDocument.publishDiagnostics &&
-    capabilities.textDocument.publishDiagnostics.relatedInformation
-  );
-  hasHoverProvider = !!(
-    capabilities.textDocument &&
-    capabilities.textDocument.hover &&
-    capabilities.textDocument.hover.contentFormat
-  );
 
   const result: InitializeResult = {
     capabilities: {
-      textDocumentSync: TextDocumentSyncKind.Incremental,
-      hoverProvider: true,
-      // Tell the client that this server supports code completion.
-      completionProvider: {
-        resolveProvider: true,
+      textDocumentSync: {
+        openClose: true,
+        change: TextDocumentSyncKind.Incremental,
+        save: {
+          includeText: false,
+        },
       },
     },
   };
@@ -118,7 +118,7 @@ connection.onDidChangeConfiguration((change) => {
   }
 
   // Revalidate all open text documents
-  documents.all().forEach(validateTextDocument);
+  // documents.all().forEach(validateTextDocument);
 });
 
 function getDocumentSettings(resource: string): Thenable<ExampleSettings> {
@@ -138,141 +138,77 @@ function getDocumentSettings(resource: string): Thenable<ExampleSettings> {
 
 // Only keep settings for open documents
 documents.onDidClose((e) => {
+  console.log("Document closed", e.document.uri);
   documentSettings.delete(e.document.uri);
+  docManager.closeDocument(e.document.uri);
+});
+
+documents.onDidOpen((e) => {
+  console.log("Document opened", e.document.uri);
+  docManager.openDocument({
+    uri: e.document.uri,
+    text: e.document.getText(),
+  });
 });
 
 // The content of a text document has changed. This event is emitted
 // when the text document first opened or when its content has changed.
-documents.onDidChangeContent((change) => {
-  validateTextDocument(change.document);
+documents.onDidChangeContent(async (change) => {
   connection.console.log("We received an file change event");
-  analyze(change.document.getText());
-});
-
-const documentComponents = new Map<string, Component | undefined>();
-
-async function validateTextDocument(textDocument: TextDocument): Promise<void> {
-  // In this simple example we get the settings for every validate run.
-  const settings = await getDocumentSettings(textDocument.uri);
-
-  // // The validator creates diagnostics for all uppercase words length 2 and more
-  // const text = textDocument.getText();
-  // const pattern = /\b[A-Z]{2,}\b/g;
-  // let m: RegExpExecArray | null;
-  const component = analyze(textDocument.getText());
-  documentComponents.set(textDocument.uri, component);
-
-  // let problems = 0;
-  // const diagnostics: Diagnostic[] = [];
-  // while ((m = pattern.exec(text)) && problems < settings.maxNumberOfProblems) {
-  //   problems++;
-  //   const diagnostic: Diagnostic = {
-  //     severity: DiagnosticSeverity.Warning,
-  //     range: {
-  //       start: textDocument.positionAt(m.index),
-  //       end: textDocument.positionAt(m.index + m[0].length),
-  //     },
-  //     message: `${m[0]} is all uppercase.`,
-  //     source: "ex",
-  //   };
-  //   if (hasDiagnosticRelatedInformationCapability) {
-  //     diagnostic.relatedInformation = [
-  //       {
-  //         location: {
-  //           uri: textDocument.uri,
-  //           range: Object.assign({}, diagnostic.range),
-  //         },
-  //         message: "Spelling matters",
-  //       },
-  //       {
-  //         location: {
-  //           uri: textDocument.uri,
-  //           range: Object.assign({}, diagnostic.range),
-  //         },
-  //         message: "Particularly for names",
-  //       },
-  //     ];
-  //   }
-  //   diagnostics.push(diagnostic);
-  // }
-
-  // // Send the computed diagnostics to VSCode.
-  // connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
-}
-
-connection.onDidChangeWatchedFiles((_change) => {
-  // Monitored files have change in VSCode
-  console.log("Change", _change);
-  connection.console.log("We received an file change event");
-});
-
-connection.onHover(
-  (_textDocumentPosition: TextDocumentPositionParams): Hover | null => {
-    connection.console.log("On hover");
-    console.log(_textDocumentPosition.position);
-
-    const component = documentComponents.get(
-      _textDocumentPosition.textDocument.uri
-    );
-    if (!component) {
-      return null;
-    }
-
-    // connection.sendRequest()
-    const info = getPositionInfo(component, _textDocumentPosition.position);
-    console.log(info);
-    return info;
+  const document = docManager.get(change.document.uri);
+  if (!document) {
+    console.log("No document found");
+    return;
   }
-);
+
+  document.setText(change.document.getText());
+  // document.update(text, 0, text.length);
+  const svelteDoc = getSvelteDocument(document);
+
+  // console.time("analyze");
+  try {
+    const transpiled = await svelteDoc.getTranspiled();
+    const analysis = analyze(transpiled.getText());
+
+    if (analysis) {
+      documentAnalysis.set(document, { analysis, transpiled });
+    } else {
+      documentAnalysis.delete(document);
+    }
+  } catch (e) {
+    console.error(e);
+  }
+
+  // console.timeEnd("analyze");
+});
+
+const documentAnalysis = new WeakMap<
+  Document,
+  {
+    transpiled: ITranspiledSvelteDocument;
+    analysis: Component;
+  }
+>();
 
 connection.onRequest(
-  "svelteReactions/getHoverInfo",
+  "svelteReactions/getPositionInfo",
   (args: { uri: string; position: Position }) => {
-    console.log("Requesting component", args.uri);
-    const component = documentComponents.get(args.uri);
-    if (!component) {
-      console.log("Document not found");
+    const document = docManager.get(args.uri);
+    if (!document) return null;
+    const docAnalysis = documentAnalysis?.get(document);
+    if (!docAnalysis) {
       return null;
     }
-    const info = getPositionInfo(component, args.position);
-    console.log(info);
+
+    const info = getPositionInfo(
+      docAnalysis.analysis,
+      args.position,
+      docAnalysis.transpiled
+    );
+    if (!info) return null;
     return info;
   }
 );
-
-// This handler provides the initial list of the completion items.
-connection.onCompletion(
-  (_textDocumentPosition: TextDocumentPositionParams): CompletionItem[] => {
-    // The pass parameter contains the position of the text document in
-    // which code complete got requested. For the example we ignore this
-    // info and always provide the same completion items.
-    return [
-      {
-        label: "TypeScript",
-        kind: CompletionItemKind.Text,
-        data: 1,
-      },
-      {
-        label: "JavaScript",
-        kind: CompletionItemKind.Text,
-        data: 2,
-      },
-    ];
-  }
-);
-
-// This handler resolves additional information for the item selected in
-// the completion list.
-connection.onCompletionResolve((item: CompletionItem): CompletionItem => {
-  if (item.data === 1) {
-    item.detail = "TypeScript details";
-    item.documentation = "TypeScript documentation";
-  } else if (item.data === 2) {
-    item.detail = "JavaScript details";
-    item.documentation = "JavaScript documentation";
-  }
-  return item;
-});
 
 // Make the text document manager listen on the connection
 // for open, change and close text document events

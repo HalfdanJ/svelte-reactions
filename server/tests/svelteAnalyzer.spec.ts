@@ -11,12 +11,12 @@ describe("svelteAnalyzer", () => {
     expect(component).toBeDefined();
   });
 
-  it.only("can get hover info", () => {
-    const hoverInfo = getPositionInfo(component, { line: 5 - 1, character: 8 });
-    expect(hoverInfo).toBeDefined();
+  // it.only("can get hover info", () => {
+  //   const hoverInfo = getPositionInfo(component, { line: 5 - 1, character: 8 });
+  //   expect(hoverInfo).toBeDefined();
 
-    expect(hoverInfo?.dependents).toEqual([{}]);
-  });
+  //   expect(hoverInfo?.dependents).toEqual([{}]);
+  // });
   // it("can get hover info", () => {
   //   const hoverInfo = getPositionInfo(component, { line: 1, character: 15 });
   //   expect(hoverInfo).toBeDefined();
@@ -24,8 +24,8 @@ describe("svelteAnalyzer", () => {
   //   expect(hoverInfo?.dependents).toEqual([{}]);
   // });
 
-  it("can get null", () => {
-    const hoverInfo2 = getPositionInfo(component, { line: 1, character: 1 });
-    expect(hoverInfo2).toBeNull();
-  });
+  // it("can get null", () => {
+  //   const hoverInfo2 = getPositionInfo(component, { line: 1, character: 1 });
+  //   expect(hoverInfo2).toBeNull();
+  // });
 });

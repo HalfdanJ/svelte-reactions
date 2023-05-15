@@ -1,15 +1,10 @@
 <script>
   export let parent1 = "test";
-  export let parent2;
+  let parent2 = "test2";
 
   $: var1 = parent1;
-  $: var2 = parent2;
-
-  $: {
-    if (var2) {
-      var2 = parent1;
-    }
-  }
-
-  // $: var6 = parent1 + parent2;
 </script>
+
+{parent1}
+
+<span><span>{parent2.toLocaleLowerCase()}</span></span>

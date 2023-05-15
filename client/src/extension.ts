@@ -1,28 +1,24 @@
-/* --------------------------------------------------------------------------------------------
- * Copyright (c) Microsoft Corporation. All rights reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- * ------------------------------------------------------------------------------------------ */
-
 import * as path from "path";
-import { Hover, OverviewRulerLane, TextEditorDecorationType } from "vscode";
-import { languages } from "vscode";
 import {
-  workspace,
-  ExtensionContext,
-  window,
-  TextEditor,
   DecorationOptions,
-  Range,
+  ExtensionContext,
   Position,
+  Range,
+  TextEditor,
+  TextEditorDecorationType,
+  languages,
+  window,
+  workspace,
 } from "vscode";
 
-import { SvelteHoverInfo } from "./types";
 import {
+  CancellationToken,
   LanguageClient,
   LanguageClientOptions,
   ServerOptions,
   TransportKind,
 } from "vscode-languageclient/node";
+import { Annotation, SvelteHoverInfo } from "./types";
 
 let client: LanguageClient;
 
@@ -36,42 +32,53 @@ function decorate(editor: TextEditor, info: SvelteHoverInfo | null) {
   dependenciesDecorations?.dispose();
   dependenciesDecorations = undefined;
 
+  console.warn("decorate", info);
+
   if (!info) return;
 
   const decorationsArray: DecorationOptions[] = [];
   const dependencyArray: DecorationOptions[] = [];
 
-  dependentsDecorations = window.createTextEditorDecorationType({
-    outlineColor: "rgba(120,120,255,0.6)",
-    outlineStyle: "dashed",
-    borderRadius: "3px",
-  });
   dependenciesDecorations = window.createTextEditorDecorationType({
-    outlineColor: "rgba(80,200,80,0.6)",
-    outlineStyle: "dashed",
-    borderRadius: "3px",
-    // overviewRulerColor: "rgba(80,200,80,0.6)",
-    // overviewRulerLane: OverviewRulerLane.Right,
+    isWholeLine: true,
+    backgroundColor: "rgba(120,120,255,0.1)",
+    border: "1px solid rgba(120,120,255,0.6)",
+    borderWidth: "0 0 0 3px",
+    // after: {
+    //   contentText: "   dependents",
+    //   color: "rgba(120,120,255,0.6)",
+    // },
+  });
+  dependentsDecorations = window.createTextEditorDecorationType({
+    // outlineColor: "rgba(80,200,80,0.6)",
+    // outlineStyle: "dashed",
+    // borderRadius: "3px",
+    isWholeLine: true,
+    backgroundColor: "rgba(80,200,80,0.1)",
+    border: "1px solid rgba(80,200,80,0.6)",
+    borderWidth: "0 0 0 3px",
   });
 
   for (const dependent of info.dependents) {
-    const range = new Range(
-      new Position(dependent.range.start.line, dependent.range.start.character),
-      new Position(dependent.range.end.line, dependent.range.end.character)
-    );
-    decorationsArray.push({ range });
+    decorationsArray.push({ range: decorationRangeFromRange(dependent.range) });
   }
   for (const dep of info.dependencies) {
-    const range = new Range(
-      new Position(dep.range.start.line, dep.range.start.character),
-      new Position(dep.range.end.line, dep.range.end.character)
-    );
-    dependencyArray.push({ range });
+    dependencyArray.push({ range: decorationRangeFromRange(dep.range) });
   }
 
-  editor.setDecorations(dependentsDecorations, decorationsArray);
-  editor.setDecorations(dependenciesDecorations, dependencyArray);
+  if (decorationsArray.length)
+    editor.setDecorations(dependentsDecorations, decorationsArray);
+  if (dependencyArray.length)
+    editor.setDecorations(dependenciesDecorations, dependencyArray);
 }
+
+function decorationRangeFromRange(range: Annotation["range"]) {
+  return new Range(
+    new Position(range.start.line, range.start.character),
+    new Position(range.end.line, range.end.character)
+  );
+}
+
 export function activate(context: ExtensionContext) {
   // The server is implemented in node
   const serverModule = context.asAbsolutePath(
@@ -109,48 +116,31 @@ export function activate(context: ExtensionContext) {
   // Start the client. This will also launch the server
   client.start();
 
+  const getInfoToken = CancellationToken.None;
   window.onDidChangeTextEditorSelection(async (event) => {
+    console.log("onDidChangeTextEditorSelection");
+    console.error("onDidChangeTextEditorSelection err");
     const document = event.textEditor.document;
     const position = event.selections[0].active;
+    if (document.languageId !== "svelte") return;
+
     const info: SvelteHoverInfo = await client.sendRequest(
-      "svelteReactions/getHoverInfo",
+      "svelteReactions/getPositionInfo",
       {
         uri: document.uri.toString(),
         position: position,
-      }
+      },
+      getInfoToken
     );
 
-    console.log("HEP HEY");
-    console.log(info);
     decorate(window.activeTextEditor, info);
   });
 
-  // languages.registerSelectionRangeProvider("svelte", {
-  //   async provideSelectionRanges(document, positions, token) {
-  //     console.warn(positions);
-  //     const info: SvelteHoverInfo = await client.sendRequest(
-  //       "svelteReactions/getHoverInfo",
-  //       {
-  //         uri: document.uri.toString(),
-  //         position: positions[0],
-  //       }
-  //     );
-
-  //     console.log("HEP HEY");
-  //     console.log(info);
-  //     decorate(window.activeTextEditor, info);
-  //     token.onCancellationRequested(() => {
-  //       dependentsDecorations?.dispose();
-  //       console.warn("cancelled");
-  //     });
-  //     // return new Hover(JSON.stringify(info));
-  //     return [];
-  //   },
   // });
   // languages.registerHoverProvider("svelte", {
   //   async provideHover(document, position, token) {
   //     const info: SvelteHoverInfo = await client.sendRequest(
-  //       "svelteReactions/getHoverInfo",
+  //       "svelteReactions/getPositionInfo",
   //       {
   //         uri: document.uri.toString(),
   //         position: position,

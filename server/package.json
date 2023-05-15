@@ -2,14 +2,14 @@
   "name": "svelte-reactions-server",
   "description": "Example implementation of a language server in node.",
   "version": "1.0.0",
-  "author": "Microsoft Corporation",
+  "author": "Jonas Jongejan",
   "license": "MIT",
   "engines": {
     "node": "*"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Microsoft/vscode-extension-samples"
+    "url": "https://github.com/halfdanj/svelte-reactions"
   },
   "dependencies": {
     "css-tree": "^2.3.1",
@@ -18,6 +18,7 @@
     "patch-package": "^7.0.0",
     "periscopic": "^3.1.0",
     "svelte": "^3.59.1",
+    "svelte-language-server": "^0.15.10",
     "vitest": "^0.31.0",
     "vscode-languageserver": "^8.1.0",
     "vscode-languageserver-textdocument": "^1.0.8"
