@@ -1,6 +1,6 @@
 # Svelte Reactions
 
-![preview](preview.gif)
+[![preview](preview.gif)](https://github.com/HalfdanJ/svelte-reactions/raw/main/preview.gif)
 
 _Note: This is in very early stage development!_
 

@@ -3,11 +3,17 @@
   "description": "VSCode extension to visualize svelte reactive statements",
   "author": "Jonas Jongejan",
   "publisher": "halfdanj",
+  "displayName": "Svelte Reactions",
+  "icon": "icon.png",
   "license": "MIT",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/halfdanj/svelte-reactive"
+  },
+  "galleryBanner": {
+    "color": "#FF3E00",
+    "theme": "dark"
   },
   "categories": [],
   "engines": {
