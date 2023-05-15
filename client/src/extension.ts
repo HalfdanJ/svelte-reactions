@@ -82,7 +82,7 @@ function decorationRangeFromRange(range: Annotation["range"]) {
 export function activate(context: ExtensionContext) {
   // The server is implemented in node
   const serverModule = context.asAbsolutePath(
-    path.join("server", "out", "server.js")
+    path.join("out", "server", "src", "server.js")
   );
 
   // If the extension is launched in debug mode then the debug server options are used
@@ -139,7 +139,6 @@ export function activate(context: ExtensionContext) {
   // });
   // languages.registerHoverProvider("svelte", {
   //   async provideHover(document, position, token) {
-  //     const info: SvelteHoverInfo = await client.sendRequest(
   //       "svelteReactions/getPositionInfo",
   //       {
   //         uri: document.uri.toString(),

@@ -58,40 +58,40 @@ Component {
   exports_from: [],
   instance_exports_from: [],
   hoistable_nodes: Set(1) {
-    Node {
+    Node2 {
       type: 'VariableDeclaration',
       start: 42,
       end: 64,
-      loc: SourceLocation {
-        start: Position { line: 3, column: 2 },
-        end: Position { line: 3, column: 24 }
+      loc: SourceLocation2 {
+        start: Position2 { line: 3, column: 2 },
+        end: Position2 { line: 3, column: 24 }
       },
       declarations: [
-        Node {
+        Node2 {
           type: 'VariableDeclarator',
           start: 46,
           end: 63,
-          loc: SourceLocation {
-            start: Position { line: 3, column: 6 },
-            end: Position { line: 3, column: 23 }
+          loc: SourceLocation2 {
+            start: Position2 { line: 3, column: 6 },
+            end: Position2 { line: 3, column: 23 }
           },
-          id: Node {
+          id: Node2 {
             type: 'Identifier',
             start: 46,
             end: 53,
-            loc: SourceLocation {
-              start: Position { line: 3, column: 6 },
-              end: Position { line: 3, column: 13 }
+            loc: SourceLocation2 {
+              start: Position2 { line: 3, column: 6 },
+              end: Position2 { line: 3, column: 13 }
             },
             name: 'parent2'
           },
-          init: Node {
+          init: Node2 {
             type: 'Literal',
             start: 56,
             end: 63,
-            loc: SourceLocation {
-              start: Position { line: 3, column: 16 },
-              end: Position { line: 3, column: 23 }
+            loc: SourceLocation2 {
+              start: Position2 { line: 3, column: 16 },
+              end: Position2 { line: 3, column: 23 }
             },
             value: 'test2',
             raw: '"test2"'
@@ -102,40 +102,40 @@ Component {
     }
   },
   node_for_declaration: Map(2) {
-    'parent1' => Node {
+    'parent1' => Node2 {
       type: 'VariableDeclaration',
       start: 18,
       end: 39,
-      loc: SourceLocation {
-        start: Position { line: 2, column: 9 },
-        end: Position { line: 2, column: 30 }
+      loc: SourceLocation2 {
+        start: Position2 { line: 2, column: 9 },
+        end: Position2 { line: 2, column: 30 }
       },
       declarations: [
-        Node {
+        Node2 {
           type: 'VariableDeclarator',
           start: 22,
           end: 38,
-          loc: SourceLocation {
-            start: Position { line: 2, column: 13 },
-            end: Position { line: 2, column: 29 }
+          loc: SourceLocation2 {
+            start: Position2 { line: 2, column: 13 },
+            end: Position2 { line: 2, column: 29 }
           },
-          id: Node {
+          id: Node2 {
             type: 'Identifier',
             start: 22,
             end: 29,
-            loc: SourceLocation {
-              start: Position { line: 2, column: 13 },
-              end: Position { line: 2, column: 20 }
+            loc: SourceLocation2 {
+              start: Position2 { line: 2, column: 13 },
+              end: Position2 { line: 2, column: 20 }
             },
             name: 'parent1'
           },
-          init: Node {
+          init: Node2 {
             type: 'Literal',
             start: 32,
             end: 38,
-            loc: SourceLocation {
-              start: Position { line: 2, column: 23 },
-              end: Position { line: 2, column: 29 }
+            loc: SourceLocation2 {
+              start: Position2 { line: 2, column: 23 },
+              end: Position2 { line: 2, column: 29 }
             },
             value: 'test',
             raw: '"test"'
@@ -144,40 +144,40 @@ Component {
       ],
       kind: 'let'
     },
-    'parent2' => Node {
+    'parent2' => Node2 {
       type: 'VariableDeclaration',
       start: 42,
       end: 64,
-      loc: SourceLocation {
-        start: Position { line: 3, column: 2 },
-        end: Position { line: 3, column: 24 }
+      loc: SourceLocation2 {
+        start: Position2 { line: 3, column: 2 },
+        end: Position2 { line: 3, column: 24 }
       },
       declarations: [
-        Node {
+        Node2 {
           type: 'VariableDeclarator',
           start: 46,
           end: 63,
-          loc: SourceLocation {
-            start: Position { line: 3, column: 6 },
-            end: Position { line: 3, column: 23 }
+          loc: SourceLocation2 {
+            start: Position2 { line: 3, column: 6 },
+            end: Position2 { line: 3, column: 23 }
           },
-          id: Node {
+          id: Node2 {
             type: 'Identifier',
             start: 46,
             end: 53,
-            loc: SourceLocation {
-              start: Position { line: 3, column: 6 },
-              end: Position { line: 3, column: 13 }
+            loc: SourceLocation2 {
+              start: Position2 { line: 3, column: 6 },
+              end: Position2 { line: 3, column: 13 }
             },
             name: 'parent2'
           },
-          init: Node {
+          init: Node2 {
             type: 'Literal',
             start: 56,
             end: 63,
-            loc: SourceLocation {
-              start: Position { line: 3, column: 16 },
-              end: Position { line: 3, column: 23 }
+            loc: SourceLocation2 {
+              start: Position2 { line: 3, column: 16 },
+              end: Position2 { line: 3, column: 23 }
             },
             value: 'test2',
             raw: '"test2"'
@@ -189,40 +189,40 @@ Component {
   },
   partly_hoisted: [],
   fully_hoisted: [
-    Node {
+    Node2 {
       type: 'VariableDeclaration',
       start: 42,
       end: 64,
-      loc: SourceLocation {
-        start: Position { line: 3, column: 2 },
-        end: Position { line: 3, column: 24 }
+      loc: SourceLocation2 {
+        start: Position2 { line: 3, column: 2 },
+        end: Position2 { line: 3, column: 24 }
       },
       declarations: [
-        Node {
+        Node2 {
           type: 'VariableDeclarator',
           start: 46,
           end: 63,
-          loc: SourceLocation {
-            start: Position { line: 3, column: 6 },
-            end: Position { line: 3, column: 23 }
+          loc: SourceLocation2 {
+            start: Position2 { line: 3, column: 6 },
+            end: Position2 { line: 3, column: 23 }
           },
-          id: Node {
+          id: Node2 {
             type: 'Identifier',
             start: 46,
             end: 53,
-            loc: SourceLocation {
-              start: Position { line: 3, column: 6 },
-              end: Position { line: 3, column: 13 }
+            loc: SourceLocation2 {
+              start: Position2 { line: 3, column: 6 },
+              end: Position2 { line: 3, column: 13 }
             },
             name: 'parent2'
           },
-          init: Node {
+          init: Node2 {
             type: 'Literal',
             start: 56,
             end: 63,
-            loc: SourceLocation {
-              start: Position { line: 3, column: 16 },
-              end: Position { line: 3, column: 23 }
+            loc: SourceLocation2 {
+              start: Position2 { line: 3, column: 16 },
+              end: Position2 { line: 3, column: 23 }
             },
             value: 'test2',
             raw: '"test2"'
@@ -236,131 +236,131 @@ Component {
     {
       assignees: Set(1) { 'var1' },
       dependencies: Set(1) { 'parent1' },
-      node: Node {
+      node: Node2 {
         type: 'LabeledStatement',
         start: 68,
         end: 86,
-        loc: SourceLocation {
-          start: Position { line: 5, column: 2 },
-          end: Position { line: 5, column: 20 }
+        loc: SourceLocation2 {
+          start: Position2 { line: 5, column: 2 },
+          end: Position2 { line: 5, column: 20 }
         },
-        body: Node {
+        body: Node2 {
           type: 'ExpressionStatement',
           start: 71,
           end: 86,
-          loc: SourceLocation {
-            start: Position { line: 5, column: 5 },
-            end: Position { line: 5, column: 20 }
+          loc: SourceLocation2 {
+            start: Position2 { line: 5, column: 5 },
+            end: Position2 { line: 5, column: 20 }
           },
-          expression: Node {
+          expression: Node2 {
             type: 'AssignmentExpression',
             start: 71,
             end: 85,
-            loc: SourceLocation {
-              start: Position { line: 5, column: 5 },
-              end: Position { line: 5, column: 19 }
+            loc: SourceLocation2 {
+              start: Position2 { line: 5, column: 5 },
+              end: Position2 { line: 5, column: 19 }
             },
             operator: '=',
-            left: Node {
+            left: Node2 {
               type: 'Identifier',
               start: 71,
               end: 75,
-              loc: SourceLocation {
-                start: Position { line: 5, column: 5 },
-                end: Position { line: 5, column: 9 }
+              loc: SourceLocation2 {
+                start: Position2 { line: 5, column: 5 },
+                end: Position2 { line: 5, column: 9 }
               },
               name: 'var1'
             },
-            right: Node {
+            right: Node2 {
               type: 'Identifier',
               start: 78,
               end: 85,
-              loc: SourceLocation {
-                start: Position { line: 5, column: 12 },
-                end: Position { line: 5, column: 19 }
+              loc: SourceLocation2 {
+                start: Position2 { line: 5, column: 12 },
+                end: Position2 { line: 5, column: 19 }
               },
               name: 'parent1'
             }
           }
         },
-        label: Node {
+        label: Node2 {
           type: 'Identifier',
           start: 68,
           end: 69,
-          loc: SourceLocation {
-            start: Position { line: 5, column: 2 },
-            end: Position { line: 5, column: 3 }
+          loc: SourceLocation2 {
+            start: Position2 { line: 5, column: 2 },
+            end: Position2 { line: 5, column: 3 }
           },
           name: '$'
         }
       },
-      declaration: Node {
+      declaration: Node2 {
         type: 'Identifier',
         start: 71,
         end: 75,
-        loc: SourceLocation {
-          start: Position { line: 5, column: 5 },
-          end: Position { line: 5, column: 9 }
+        loc: SourceLocation2 {
+          start: Position2 { line: 5, column: 5 },
+          end: Position2 { line: 5, column: 9 }
         },
         name: 'var1'
       }
     }
   ],
   reactive_declaration_nodes: Set(1) {
-    Node {
+    Node2 {
       type: 'LabeledStatement',
       start: 68,
       end: 86,
-      loc: SourceLocation {
-        start: Position { line: 5, column: 2 },
-        end: Position { line: 5, column: 20 }
+      loc: SourceLocation2 {
+        start: Position2 { line: 5, column: 2 },
+        end: Position2 { line: 5, column: 20 }
       },
-      body: Node {
+      body: Node2 {
         type: 'ExpressionStatement',
         start: 71,
         end: 86,
-        loc: SourceLocation {
-          start: Position { line: 5, column: 5 },
-          end: Position { line: 5, column: 20 }
+        loc: SourceLocation2 {
+          start: Position2 { line: 5, column: 5 },
+          end: Position2 { line: 5, column: 20 }
         },
-        expression: Node {
+        expression: Node2 {
           type: 'AssignmentExpression',
           start: 71,
           end: 85,
-          loc: SourceLocation {
-            start: Position { line: 5, column: 5 },
-            end: Position { line: 5, column: 19 }
+          loc: SourceLocation2 {
+            start: Position2 { line: 5, column: 5 },
+            end: Position2 { line: 5, column: 19 }
           },
           operator: '=',
-          left: Node {
+          left: Node2 {
             type: 'Identifier',
             start: 71,
             end: 75,
-            loc: SourceLocation {
-              start: Position { line: 5, column: 5 },
-              end: Position { line: 5, column: 9 }
+            loc: SourceLocation2 {
+              start: Position2 { line: 5, column: 5 },
+              end: Position2 { line: 5, column: 9 }
             },
             name: 'var1'
           },
-          right: Node {
+          right: Node2 {
             type: 'Identifier',
             start: 78,
             end: 85,
-            loc: SourceLocation {
-              start: Position { line: 5, column: 12 },
-              end: Position { line: 5, column: 19 }
+            loc: SourceLocation2 {
+              start: Position2 { line: 5, column: 12 },
+              end: Position2 { line: 5, column: 19 }
             },
             name: 'parent1'
           }
         }
       },
-      label: Node {
+      label: Node2 {
         type: 'Identifier',
         start: 68,
         end: 69,
-        loc: SourceLocation {
-          start: Position { line: 5, column: 2 },
-          end: Position { line: 5, column: 3 }
+        loc: SourceLocation2 {
+          start: Position2 { line: 5, column: 2 },
+          end: Position2 { line: 5, column: 3 }
         },
         name: '$'
       }
@@ -402,7 +402,7 @@ Component {
           dependencies_for_name: Map(0) {}
         },
         owner: [Circular *1],
-        scope: Scope {
+        scope: Scope$1 {
           parent: null,
           block: false,
           declarations: Map(0) {},
@@ -430,39 +430,39 @@ Component {
             contextual_dependencies: Set(0) {},
             declarations: [],
             uses_context: false,
-            node: Node {
+            node: Node2 {
               type: 'CallExpression',
               start: 122,
               end: 149,
-              loc: SourceLocation {
-                start: Position { line: 10, column: 13 },
-                end: Position { line: 10, column: 40 }
+              loc: SourceLocation2 {
+                start: Position2 { line: 10, column: 13 },
+                end: Position2 { line: 10, column: 40 }
               },
-              callee: Node {
+              callee: Node2 {
                 type: 'MemberExpression',
                 start: 122,
                 end: 147,
-                loc: SourceLocation {
-                  start: Position { line: 10, column: 13 },
-                  end: Position { line: 10, column: 38 }
+                loc: SourceLocation2 {
+                  start: Position2 { line: 10, column: 13 },
+                  end: Position2 { line: 10, column: 38 }
                 },
-                object: Node {
+                object: Node2 {
                   type: 'Identifier',
                   start: 122,
                   end: 129,
-                  loc: SourceLocation {
-                    start: Position { line: 10, column: 13 },
-                    end: Position { line: 10, column: 20 }
+                  loc: SourceLocation2 {
+                    start: Position2 { line: 10, column: 13 },
+                    end: Position2 { line: 10, column: 20 }
                   },
                   name: 'parent2'
                 },
-                property: Node {
+                property: Node2 {
                   type: 'Identifier',
                   start: 130,
                   end: 147,
-                  loc: SourceLocation {
-                    start: Position { line: 10, column: 21 },
-                    end: Position { line: 10, column: 38 }
+                  loc: SourceLocation2 {
+                    start: Position2 { line: 10, column: 21 },
+                    end: Position2 { line: 10, column: 38 }
                   },
                   name: 'toLocaleLowerCase'
                 },
@@ -479,7 +479,7 @@ Component {
               dependencies_for_name: Map(0) {}
             },
             owner: [Circular *2],
-            scope: Scope {
+            scope: Scope$1 {
               parent: null,
               block: false,
               declarations: Map(0) {},
@@ -524,7 +524,7 @@ Component {
           dependencies_for_name: Map(0) {}
         },
         owner: [Circular *3],
-        scope: Scope {
+        scope: Scope$1 {
           parent: null,
           block: false,
           declarations: Map(0) {},
@@ -571,7 +571,7 @@ Component {
               dependencies_for_name: Map(0) {}
             },
             owner: [Circular *1],
-            scope: Scope {
+            scope: Scope$1 {
               parent: null,
               block: false,
               declarations: Map(0) {},
@@ -599,39 +599,39 @@ Component {
                 contextual_dependencies: Set(0) {},
                 declarations: [],
                 uses_context: false,
-                node: Node {
+                node: Node2 {
                   type: 'CallExpression',
                   start: 122,
                   end: 149,
-                  loc: SourceLocation {
-                    start: Position { line: 10, column: 13 },
-                    end: Position { line: 10, column: 40 }
+                  loc: SourceLocation2 {
+                    start: Position2 { line: 10, column: 13 },
+                    end: Position2 { line: 10, column: 40 }
                   },
-                  callee: Node {
+                  callee: Node2 {
                     type: 'MemberExpression',
                     start: 122,
                     end: 147,
-                    loc: SourceLocation {
-                      start: Position { line: 10, column: 13 },
-                      end: Position { line: 10, column: 38 }
+                    loc: SourceLocation2 {
+                      start: Position2 { line: 10, column: 13 },
+                      end: Position2 { line: 10, column: 38 }
                     },
-                    object: Node {
+                    object: Node2 {
                       type: 'Identifier',
                       start: 122,
                       end: 129,
-                      loc: SourceLocation {
-                        start: Position { line: 10, column: 13 },
-                        end: Position { line: 10, column: 20 }
+                      loc: SourceLocation2 {
+                        start: Position2 { line: 10, column: 13 },
+                        end: Position2 { line: 10, column: 20 }
                       },
                       name: 'parent2'
                     },
-                    property: Node {
+                    property: Node2 {
                       type: 'Identifier',
                       start: 130,
                       end: 147,
-                      loc: SourceLocation {
-                        start: Position { line: 10, column: 21 },
-                        end: Position { line: 10, column: 38 }
+                      loc: SourceLocation2 {
+                        start: Position2 { line: 10, column: 21 },
+                        end: Position2 { line: 10, column: 38 }
                       },
                       name: 'toLocaleLowerCase'
                     },
@@ -648,7 +648,7 @@ Component {
                   dependencies_for_name: Map(0) {}
                 },
                 owner: [Circular *2],
-                scope: Scope {
+                scope: Scope$1 {
                   parent: null,
                   block: false,
                   declarations: Map(0) {},
@@ -681,13 +681,13 @@ Component {
             contextual_dependencies: Set(0) {},
             declarations: [],
             uses_context: false,
-            node: Node {
+            node: Node2 {
               type: 'Identifier',
               start: 99,
               end: 106,
-              loc: SourceLocation {
-                start: Position { line: 8, column: 1 },
-                end: Position { line: 8, column: 8 }
+              loc: SourceLocation2 {
+                start: Position2 { line: 8, column: 1 },
+                end: Position2 { line: 8, column: 8 }
               },
               name: 'parent1'
             },
@@ -698,7 +698,7 @@ Component {
               dependencies_for_name: Map(0) {}
             },
             owner: [Circular *4],
-            scope: Scope {
+            scope: Scope$1 {
               parent: null,
               block: false,
               declarations: Map(0) {},
@@ -724,11 +724,11 @@ Component {
     }
   ],
   aliases: Map(0) {},
-  used_names: Set(1) { 'MyComponent' },
+  used_names: Set(1) { '' },
   globally_used_names: Set(0) {},
   slots: Map(0) {},
   slot_outlets: Set(0) {},
-  name: { type: 'Identifier', name: 'MyComponent' },
+  name: { type: 'Identifier', name: '' },
   stats: {},
   warnings: [],
   ast: {
@@ -742,13 +742,13 @@ Component {
           start: 98,
           end: 107,
           type: 'MustacheTag',
-          expression: Node {
+          expression: Node2 {
             type: 'Identifier',
             start: 99,
             end: 106,
-            loc: SourceLocation {
-              start: Position { line: 8, column: 1 },
-              end: Position { line: 8, column: 8 }
+            loc: SourceLocation2 {
+              start: Position2 { line: 8, column: 1 },
+              end: Position2 { line: 8, column: 8 }
             },
             name: 'parent1'
           }
@@ -778,39 +778,39 @@ Component {
                   start: 121,
                   end: 150,
                   type: 'MustacheTag',
-                  expression: Node {
+                  expression: Node2 {
                     type: 'CallExpression',
                     start: 122,
                     end: 149,
-                    loc: SourceLocation {
-                      start: Position { line: 10, column: 13 },
-                      end: Position { line: 10, column: 40 }
+                    loc: SourceLocation2 {
+                      start: Position2 { line: 10, column: 13 },
+                      end: Position2 { line: 10, column: 40 }
                     },
-                    callee: Node {
+                    callee: Node2 {
                       type: 'MemberExpression',
                       start: 122,
                       end: 147,
-                      loc: SourceLocation {
-                        start: Position { line: 10, column: 13 },
-                        end: Position { line: 10, column: 38 }
+                      loc: SourceLocation2 {
+                        start: Position2 { line: 10, column: 13 },
+                        end: Position2 { line: 10, column: 38 }
                       },
-                      object: Node {
+                      object: Node2 {
                         type: 'Identifier',
                         start: 122,
                         end: 129,
-                        loc: SourceLocation {
-                          start: Position { line: 10, column: 13 },
-                          end: Position { line: 10, column: 20 }
+                        loc: SourceLocation2 {
+                          start: Position2 { line: 10, column: 13 },
+                          end: Position2 { line: 10, column: 20 }
                         },
                         name: 'parent2'
                       },
-                      property: Node {
+                      property: Node2 {
                         type: 'Identifier',
                         start: 130,
                         end: 147,
-                        loc: SourceLocation {
-                          start: Position { line: 10, column: 21 },
-                          end: Position { line: 10, column: 38 }
+                        loc: SourceLocation2 {
+                          start: Position2 { line: 10, column: 21 },
+                          end: Position2 { line: 10, column: 38 }
                         },
                         name: 'toLocaleLowerCase'
                       },
@@ -833,49 +833,49 @@ Component {
       start: 0,
       end: 96,
       context: 'default',
-      content: Node {
+      content: Node2 {
         type: 'Program',
         start: 8,
         end: 87,
-        loc: SourceLocation {
-          start: Position { line: 1, column: 0 },
-          end: Position { line: 6, column: 0 }
+        loc: SourceLocation2 {
+          start: Position2 { line: 1, column: 0 },
+          end: Position2 { line: 6, column: 0 }
         },
         body: [
-          Node {
+          Node2 {
             type: 'VariableDeclaration',
             start: 18,
             end: 39,
-            loc: SourceLocation {
-              start: Position { line: 2, column: 9 },
-              end: Position { line: 2, column: 30 }
+            loc: SourceLocation2 {
+              start: Position2 { line: 2, column: 9 },
+              end: Position2 { line: 2, column: 30 }
             },
             declarations: [
-              Node {
+              Node2 {
                 type: 'VariableDeclarator',
                 start: 22,
                 end: 38,
-                loc: SourceLocation {
-                  start: Position { line: 2, column: 13 },
-                  end: Position { line: 2, column: 29 }
+                loc: SourceLocation2 {
+                  start: Position2 { line: 2, column: 13 },
+                  end: Position2 { line: 2, column: 29 }
                 },
-                id: Node {
+                id: Node2 {
                   type: 'Identifier',
                   start: 22,
                   end: 29,
-                  loc: SourceLocation {
-                    start: Position { line: 2, column: 13 },
-                    end: Position { line: 2, column: 20 }
+                  loc: SourceLocation2 {
+                    start: Position2 { line: 2, column: 13 },
+                    end: Position2 { line: 2, column: 20 }
                   },
                   name: 'parent1'
                 },
-                init: Node {
+                init: Node2 {
                   type: 'Literal',
                   start: 32,
                   end: 38,
-                  loc: SourceLocation {
-                    start: Position { line: 2, column: 23 },
-                    end: Position { line: 2, column: 29 }
+                  loc: SourceLocation2 {
+                    start: Position2 { line: 2, column: 23 },
+                    end: Position2 { line: 2, column: 29 }
                   },
                   value: 'test',
                   raw: '"test"'
@@ -884,60 +884,60 @@ Component {
             ],
             kind: 'let'
           },
-          Node {
+          Node2 {
             type: 'LabeledStatement',
             start: 68,
             end: 86,
-            loc: SourceLocation {
-              start: Position { line: 5, column: 2 },
-              end: Position { line: 5, column: 20 }
+            loc: SourceLocation2 {
+              start: Position2 { line: 5, column: 2 },
+              end: Position2 { line: 5, column: 20 }
             },
-            body: Node {
+            body: Node2 {
               type: 'ExpressionStatement',
               start: 71,
               end: 86,
-              loc: SourceLocation {
-                start: Position { line: 5, column: 5 },
-                end: Position { line: 5, column: 20 }
+              loc: SourceLocation2 {
+                start: Position2 { line: 5, column: 5 },
+                end: Position2 { line: 5, column: 20 }
               },
-              expression: Node {
+              expression: Node2 {
                 type: 'AssignmentExpression',
                 start: 71,
                 end: 85,
-                loc: SourceLocation {
-                  start: Position { line: 5, column: 5 },
-                  end: Position { line: 5, column: 19 }
+                loc: SourceLocation2 {
+                  start: Position2 { line: 5, column: 5 },
+                  end: Position2 { line: 5, column: 19 }
                 },
                 operator: '=',
-                left: Node {
+                left: Node2 {
                   type: 'Identifier',
                   start: 71,
                   end: 75,
-                  loc: SourceLocation {
-                    start: Position { line: 5, column: 5 },
-                    end: Position { line: 5, column: 9 }
+                  loc: SourceLocation2 {
+                    start: Position2 { line: 5, column: 5 },
+                    end: Position2 { line: 5, column: 9 }
                   },
                   name: 'var1'
                 },
-                right: Node {
+                right: Node2 {
                   type: 'Identifier',
                   start: 78,
                   end: 85,
-                  loc: SourceLocation {
-                    start: Position { line: 5, column: 12 },
-                    end: Position { line: 5, column: 19 }
+                  loc: SourceLocation2 {
+                    start: Position2 { line: 5, column: 12 },
+                    end: Position2 { line: 5, column: 19 }
                   },
                   name: 'parent1'
                 }
               }
             },
-            label: Node {
+            label: Node2 {
               type: 'Identifier',
               start: 68,
               end: 69,
-              loc: SourceLocation {
-                start: Position { line: 5, column: 2 },
-                end: Position { line: 5, column: 3 }
+              loc: SourceLocation2 {
+                start: Position2 { line: 5, column: 2 },
+                end: Position2 { line: 5, column: 3 }
               },
               name: '$'
             }
@@ -958,7 +958,7 @@ Component {
     '{parent1}\n' +
     '\n' +
     '<span><span>{parent2.toLocaleLowerCase()}</span></span>\n',
-  compile_options: { name: 'MyComponent' },
+  compile_options: {},
   original_ast: {
     html: {
       start: 98,
@@ -1227,7 +1227,7 @@ Component {
     module: undefined
   },
   file: undefined,
-  locate: [Function: locate],
+  locate: [Function: locate2],
   stylesheet: Stylesheet {
     children: [],
     keyframes: Map(0) {},
@@ -1259,13 +1259,13 @@ Component {
             start: 98,
             end: 107,
             type: 'MustacheTag',
-            expression: Node {
+            expression: Node2 {
               type: 'Identifier',
               start: 99,
               end: 106,
-              loc: SourceLocation {
-                start: Position { line: 8, column: 1 },
-                end: Position { line: 8, column: 8 }
+              loc: SourceLocation2 {
+                start: Position2 { line: 8, column: 1 },
+                end: Position2 { line: 8, column: 8 }
               },
               name: 'parent1'
             }
@@ -1295,39 +1295,39 @@ Component {
                     start: 121,
                     end: 150,
                     type: 'MustacheTag',
-                    expression: Node {
+                    expression: Node2 {
                       type: 'CallExpression',
                       start: 122,
                       end: 149,
-                      loc: SourceLocation {
-                        start: Position { line: 10, column: 13 },
-                        end: Position { line: 10, column: 40 }
+                      loc: SourceLocation2 {
+                        start: Position2 { line: 10, column: 13 },
+                        end: Position2 { line: 10, column: 40 }
                       },
-                      callee: Node {
+                      callee: Node2 {
                         type: 'MemberExpression',
                         start: 122,
                         end: 147,
-                        loc: SourceLocation {
-                          start: Position { line: 10, column: 13 },
-                          end: Position { line: 10, column: 38 }
+                        loc: SourceLocation2 {
+                          start: Position2 { line: 10, column: 13 },
+                          end: Position2 { line: 10, column: 38 }
                         },
-                        object: Node {
+                        object: Node2 {
                           type: 'Identifier',
                           start: 122,
                           end: 129,
-                          loc: SourceLocation {
-                            start: Position { line: 10, column: 13 },
-                            end: Position { line: 10, column: 20 }
+                          loc: SourceLocation2 {
+                            start: Position2 { line: 10, column: 13 },
+                            end: Position2 { line: 10, column: 20 }
                           },
                           name: 'parent2'
                         },
-                        property: Node {
+                        property: Node2 {
                           type: 'Identifier',
                           start: 130,
                           end: 147,
-                          loc: SourceLocation {
-                            start: Position { line: 10, column: 21 },
-                            end: Position { line: 10, column: 38 }
+                          loc: SourceLocation2 {
+                            start: Position2 { line: 10, column: 21 },
+                            end: Position2 { line: 10, column: 38 }
                           },
                           name: 'toLocaleLowerCase'
                         },
@@ -1350,49 +1350,49 @@ Component {
         start: 0,
         end: 96,
         context: 'default',
-        content: Node {
+        content: Node2 {
           type: 'Program',
           start: 8,
           end: 87,
-          loc: SourceLocation {
-            start: Position { line: 1, column: 0 },
-            end: Position { line: 6, column: 0 }
+          loc: SourceLocation2 {
+            start: Position2 { line: 1, column: 0 },
+            end: Position2 { line: 6, column: 0 }
           },
           body: [
-            Node {
+            Node2 {
               type: 'VariableDeclaration',
               start: 18,
               end: 39,
-              loc: SourceLocation {
-                start: Position { line: 2, column: 9 },
-                end: Position { line: 2, column: 30 }
+              loc: SourceLocation2 {
+                start: Position2 { line: 2, column: 9 },
+                end: Position2 { line: 2, column: 30 }
               },
               declarations: [
-                Node {
+                Node2 {
                   type: 'VariableDeclarator',
                   start: 22,
                   end: 38,
-                  loc: SourceLocation {
-                    start: Position { line: 2, column: 13 },
-                    end: Position { line: 2, column: 29 }
+                  loc: SourceLocation2 {
+                    start: Position2 { line: 2, column: 13 },
+                    end: Position2 { line: 2, column: 29 }
                   },
-                  id: Node {
+                  id: Node2 {
                     type: 'Identifier',
                     start: 22,
                     end: 29,
-                    loc: SourceLocation {
-                      start: Position { line: 2, column: 13 },
-                      end: Position { line: 2, column: 20 }
+                    loc: SourceLocation2 {
+                      start: Position2 { line: 2, column: 13 },
+                      end: Position2 { line: 2, column: 20 }
                     },
                     name: 'parent1'
                   },
-                  init: Node {
+                  init: Node2 {
                     type: 'Literal',
                     start: 32,
                     end: 38,
-                    loc: SourceLocation {
-                      start: Position { line: 2, column: 23 },
-                      end: Position { line: 2, column: 29 }
+                    loc: SourceLocation2 {
+                      start: Position2 { line: 2, column: 23 },
+                      end: Position2 { line: 2, column: 29 }
                     },
                     value: 'test',
                     raw: '"test"'
@@ -1401,60 +1401,60 @@ Component {
               ],
               kind: 'let'
             },
-            Node {
+            Node2 {
               type: 'LabeledStatement',
               start: 68,
               end: 86,
-              loc: SourceLocation {
-                start: Position { line: 5, column: 2 },
-                end: Position { line: 5, column: 20 }
+              loc: SourceLocation2 {
+                start: Position2 { line: 5, column: 2 },
+                end: Position2 { line: 5, column: 20 }
               },
-              body: Node {
+              body: Node2 {
                 type: 'ExpressionStatement',
                 start: 71,
                 end: 86,
-                loc: SourceLocation {
-                  start: Position { line: 5, column: 5 },
-                  end: Position { line: 5, column: 20 }
+                loc: SourceLocation2 {
+                  start: Position2 { line: 5, column: 5 },
+                  end: Position2 { line: 5, column: 20 }
                 },
-                expression: Node {
+                expression: Node2 {
                   type: 'AssignmentExpression',
                   start: 71,
                   end: 85,
-                  loc: SourceLocation {
-                    start: Position { line: 5, column: 5 },
-                    end: Position { line: 5, column: 19 }
+                  loc: SourceLocation2 {
+                    start: Position2 { line: 5, column: 5 },
+                    end: Position2 { line: 5, column: 19 }
                   },
                   operator: '=',
-                  left: Node {
+                  left: Node2 {
                     type: 'Identifier',
                     start: 71,
                     end: 75,
-                    loc: SourceLocation {
-                      start: Position { line: 5, column: 5 },
-                      end: Position { line: 5, column: 9 }
+                    loc: SourceLocation2 {
+                      start: Position2 { line: 5, column: 5 },
+                      end: Position2 { line: 5, column: 9 }
                     },
                     name: 'var1'
                   },
-                  right: Node {
+                  right: Node2 {
                     type: 'Identifier',
                     start: 78,
                     end: 85,
-                    loc: SourceLocation {
-                      start: Position { line: 5, column: 12 },
-                      end: Position { line: 5, column: 19 }
+                    loc: SourceLocation2 {
+                      start: Position2 { line: 5, column: 12 },
+                      end: Position2 { line: 5, column: 19 }
                     },
                     name: 'parent1'
                   }
                 }
               },
-              label: Node {
+              label: Node2 {
                 type: 'Identifier',
                 start: 68,
                 end: 69,
-                loc: SourceLocation {
-                  start: Position { line: 5, column: 2 },
-                  end: Position { line: 5, column: 3 }
+                loc: SourceLocation2 {
+                  start: Position2 { line: 5, column: 2 },
+                  end: Position2 { line: 5, column: 3 }
                 },
                 name: '$'
               }
@@ -1476,46 +1476,46 @@ Component {
     namespace: undefined
   },
   namespace: undefined,
-  tag: 'MyComponent',
+  tag: '',
   ignores: undefined,
-  instance_scope: Scope {
+  instance_scope: Scope$1 {
     parent: null,
     block: false,
     declarations: Map(2) {
-      'parent1' => Node {
+      'parent1' => Node2 {
         type: 'VariableDeclaration',
         start: 18,
         end: 39,
-        loc: SourceLocation {
-          start: Position { line: 2, column: 9 },
-          end: Position { line: 2, column: 30 }
+        loc: SourceLocation2 {
+          start: Position2 { line: 2, column: 9 },
+          end: Position2 { line: 2, column: 30 }
         },
         declarations: [
-          Node {
+          Node2 {
             type: 'VariableDeclarator',
             start: 22,
             end: 38,
-            loc: SourceLocation {
-              start: Position { line: 2, column: 13 },
-              end: Position { line: 2, column: 29 }
+            loc: SourceLocation2 {
+              start: Position2 { line: 2, column: 13 },
+              end: Position2 { line: 2, column: 29 }
             },
-            id: Node {
+            id: Node2 {
               type: 'Identifier',
               start: 22,
               end: 29,
-              loc: SourceLocation {
-                start: Position { line: 2, column: 13 },
-                end: Position { line: 2, column: 20 }
+              loc: SourceLocation2 {
+                start: Position2 { line: 2, column: 13 },
+                end: Position2 { line: 2, column: 20 }
               },
               name: 'parent1'
             },
-            init: Node {
+            init: Node2 {
               type: 'Literal',
               start: 32,
               end: 38,
-              loc: SourceLocation {
-                start: Position { line: 2, column: 23 },
-                end: Position { line: 2, column: 29 }
+              loc: SourceLocation2 {
+                start: Position2 { line: 2, column: 23 },
+                end: Position2 { line: 2, column: 29 }
               },
               value: 'test',
               raw: '"test"'
@@ -1524,40 +1524,40 @@ Component {
         ],
         kind: 'let'
       },
-      'parent2' => Node {
+      'parent2' => Node2 {
         type: 'VariableDeclaration',
         start: 42,
         end: 64,
-        loc: SourceLocation {
-          start: Position { line: 3, column: 2 },
-          end: Position { line: 3, column: 24 }
+        loc: SourceLocation2 {
+          start: Position2 { line: 3, column: 2 },
+          end: Position2 { line: 3, column: 24 }
         },
         declarations: [
-          Node {
+          Node2 {
             type: 'VariableDeclarator',
             start: 46,
             end: 63,
-            loc: SourceLocation {
-              start: Position { line: 3, column: 6 },
-              end: Position { line: 3, column: 23 }
+            loc: SourceLocation2 {
+              start: Position2 { line: 3, column: 6 },
+              end: Position2 { line: 3, column: 23 }
             },
-            id: Node {
+            id: Node2 {
               type: 'Identifier',
               start: 46,
               end: 53,
-              loc: SourceLocation {
-                start: Position { line: 3, column: 6 },
-                end: Position { line: 3, column: 13 }
+              loc: SourceLocation2 {
+                start: Position2 { line: 3, column: 6 },
+                end: Position2 { line: 3, column: 13 }
               },
               name: 'parent2'
             },
-            init: Node {
+            init: Node2 {
               type: 'Literal',
               start: 56,
               end: 63,
-              loc: SourceLocation {
-                start: Position { line: 3, column: 16 },
-                end: Position { line: 3, column: 23 }
+              loc: SourceLocation2 {
+                start: Position2 { line: 3, column: 16 },
+                end: Position2 { line: 3, column: 23 }
               },
               value: 'test2',
               raw: '"test2"'
@@ -1600,13 +1600,13 @@ Component {
             contextual_dependencies: Set(0) {},
             declarations: [],
             uses_context: false,
-            node: Node {
+            node: Node2 {
               type: 'Identifier',
               start: 99,
               end: 106,
-              loc: SourceLocation {
-                start: Position { line: 8, column: 1 },
-                end: Position { line: 8, column: 8 }
+              loc: SourceLocation2 {
+                start: Position2 { line: 8, column: 1 },
+                end: Position2 { line: 8, column: 8 }
               },
               name: 'parent1'
             },
@@ -1617,7 +1617,7 @@ Component {
               dependencies_for_name: Map(0) {}
             },
             owner: [Circular *4],
-            scope: Scope {
+            scope: Scope$1 {
               parent: null,
               block: false,
               declarations: Map(0) {},
@@ -1665,7 +1665,7 @@ Component {
                   dependencies_for_name: Map(0) {}
                 },
                 owner: [Circular *3],
-                scope: Scope {
+                scope: Scope$1 {
                   parent: null,
                   block: false,
                   declarations: Map(0) {},
@@ -1712,7 +1712,7 @@ Component {
                       dependencies_for_name: Map(0) {}
                     },
                     owner: [Circular *1],
-                    scope: Scope {
+                    scope: Scope$1 {
                       parent: null,
                       block: false,
                       declarations: Map(0) {},
@@ -1740,39 +1740,39 @@ Component {
                         contextual_dependencies: Set(0) {},
                         declarations: [],
                         uses_context: false,
-                        node: Node {
+                        node: Node2 {
                           type: 'CallExpression',
                           start: 122,
                           end: 149,
-                          loc: SourceLocation {
-                            start: Position { line: 10, column: 13 },
-                            end: Position { line: 10, column: 40 }
+                          loc: SourceLocation2 {
+                            start: Position2 { line: 10, column: 13 },
+                            end: Position2 { line: 10, column: 40 }
                           },
-                          callee: Node {
+                          callee: Node2 {
                             type: 'MemberExpression',
                             start: 122,
                             end: 147,
-                            loc: SourceLocation {
-                              start: Position { line: 10, column: 13 },
-                              end: Position { line: 10, column: 38 }
+                            loc: SourceLocation2 {
+                              start: Position2 { line: 10, column: 13 },
+                              end: Position2 { line: 10, column: 38 }
                             },
-                            object: Node {
+                            object: Node2 {
                               type: 'Identifier',
                               start: 122,
                               end: 129,
-                              loc: SourceLocation {
-                                start: Position { line: 10, column: 13 },
-                                end: Position { line: 10, column: 20 }
+                              loc: SourceLocation2 {
+                                start: Position2 { line: 10, column: 13 },
+                                end: Position2 { line: 10, column: 20 }
                               },
                               name: 'parent2'
                             },
-                            property: Node {
+                            property: Node2 {
                               type: 'Identifier',
                               start: 130,
                               end: 147,
-                              loc: SourceLocation {
-                                start: Position { line: 10, column: 21 },
-                                end: Position { line: 10, column: 38 }
+                              loc: SourceLocation2 {
+                                start: Position2 { line: 10, column: 21 },
+                                end: Position2 { line: 10, column: 38 }
                               },
                               name: 'toLocaleLowerCase'
                             },
@@ -1789,7 +1789,7 @@ Component {
                           dependencies_for_name: Map(0) {}
                         },
                         owner: [Circular *2],
-                        scope: Scope {
+                        scope: Scope$1 {
                           parent: null,
                           block: false,
                           declarations: Map(0) {},
@@ -1821,13 +1821,13 @@ Component {
           contextual_dependencies: Set(0) {},
           declarations: [],
           uses_context: false,
-          node: Node {
+          node: Node2 {
             type: 'Identifier',
             start: 99,
             end: 106,
-            loc: SourceLocation {
-              start: Position { line: 8, column: 1 },
-              end: Position { line: 8, column: 8 }
+            loc: SourceLocation2 {
+              start: Position2 { line: 8, column: 1 },
+              end: Position2 { line: 8, column: 8 }
             },
             name: 'parent1'
           },
@@ -1838,7 +1838,7 @@ Component {
             dependencies_for_name: Map(0) {}
           },
           owner: [Circular *4],
-          scope: Scope {
+          scope: Scope$1 {
             parent: null,
             block: false,
             declarations: Map(0) {},
@@ -1894,7 +1894,7 @@ Component {
                 dependencies_for_name: Map(0) {}
               },
               owner: [Circular *3],
-              scope: Scope {
+              scope: Scope$1 {
                 parent: null,
                 block: false,
                 declarations: Map(0) {},
@@ -1941,7 +1941,7 @@ Component {
                     dependencies_for_name: Map(0) {}
                   },
                   owner: [Circular *1],
-                  scope: Scope {
+                  scope: Scope$1 {
                     parent: null,
                     block: false,
                     declarations: Map(0) {},
@@ -1969,39 +1969,39 @@ Component {
                       contextual_dependencies: Set(0) {},
                       declarations: [],
                       uses_context: false,
-                      node: Node {
+                      node: Node2 {
                         type: 'CallExpression',
                         start: 122,
                         end: 149,
-                        loc: SourceLocation {
-                          start: Position { line: 10, column: 13 },
-                          end: Position { line: 10, column: 40 }
+                        loc: SourceLocation2 {
+                          start: Position2 { line: 10, column: 13 },
+                          end: Position2 { line: 10, column: 40 }
                         },
-                        callee: Node {
+                        callee: Node2 {
                           type: 'MemberExpression',
                           start: 122,
                           end: 147,
-                          loc: SourceLocation {
-                            start: Position { line: 10, column: 13 },
-                            end: Position { line: 10, column: 38 }
+                          loc: SourceLocation2 {
+                            start: Position2 { line: 10, column: 13 },
+                            end: Position2 { line: 10, column: 38 }
                           },
-                          object: Node {
+                          object: Node2 {
                             type: 'Identifier',
                             start: 122,
                             end: 129,
-                            loc: SourceLocation {
-                              start: Position { line: 10, column: 13 },
-                              end: Position { line: 10, column: 20 }
+                            loc: SourceLocation2 {
+                              start: Position2 { line: 10, column: 13 },
+                              end: Position2 { line: 10, column: 20 }
                             },
                             name: 'parent2'
                           },
-                          property: Node {
+                          property: Node2 {
                             type: 'Identifier',
                             start: 130,
                             end: 147,
-                            loc: SourceLocation {
-                              start: Position { line: 10, column: 21 },
-                              end: Position { line: 10, column: 38 }
+                            loc: SourceLocation2 {
+                              start: Position2 { line: 10, column: 21 },
+                              end: Position2 { line: 10, column: 38 }
                             },
                             name: 'toLocaleLowerCase'
                           },
@@ -2018,7 +2018,7 @@ Component {
                         dependencies_for_name: Map(0) {}
                       },
                       owner: [Circular *2],
-                      scope: Scope {
+                      scope: Scope$1 {
                         parent: null,
                         block: false,
                         declarations: Map(0) {},
@@ -2055,13 +2055,13 @@ Component {
             contextual_dependencies: Set(0) {},
             declarations: [],
             uses_context: false,
-            node: Node {
+            node: Node2 {
               type: 'Identifier',
               start: 99,
               end: 106,
-              loc: SourceLocation {
-                start: Position { line: 8, column: 1 },
-                end: Position { line: 8, column: 8 }
+              loc: SourceLocation2 {
+                start: Position2 { line: 8, column: 1 },
+                end: Position2 { line: 8, column: 8 }
               },
               name: 'parent1'
             },
@@ -2072,7 +2072,7 @@ Component {
               dependencies_for_name: Map(0) {}
             },
             owner: [Circular *4],
-            scope: Scope {
+            scope: Scope$1 {
               parent: null,
               block: false,
               declarations: Map(0) {},
@@ -2123,7 +2123,7 @@ Component {
               dependencies_for_name: Map(0) {}
             },
             owner: [Circular *3],
-            scope: Scope {
+            scope: Scope$1 {
               parent: null,
               block: false,
               declarations: Map(0) {},
@@ -2170,7 +2170,7 @@ Component {
                   dependencies_for_name: Map(0) {}
                 },
                 owner: [Circular *1],
-                scope: Scope {
+                scope: Scope$1 {
                   parent: null,
                   block: false,
                   declarations: Map(0) {},
@@ -2198,39 +2198,39 @@ Component {
                     contextual_dependencies: Set(0) {},
                     declarations: [],
                     uses_context: false,
-                    node: Node {
+                    node: Node2 {
                       type: 'CallExpression',
                       start: 122,
                       end: 149,
-                      loc: SourceLocation {
-                        start: Position { line: 10, column: 13 },
-                        end: Position { line: 10, column: 40 }
+                      loc: SourceLocation2 {
+                        start: Position2 { line: 10, column: 13 },
+                        end: Position2 { line: 10, column: 40 }
                       },
-                      callee: Node {
+                      callee: Node2 {
                         type: 'MemberExpression',
                         start: 122,
                         end: 147,
-                        loc: SourceLocation {
-                          start: Position { line: 10, column: 13 },
-                          end: Position { line: 10, column: 38 }
+                        loc: SourceLocation2 {
+                          start: Position2 { line: 10, column: 13 },
+                          end: Position2 { line: 10, column: 38 }
                         },
-                        object: Node {
+                        object: Node2 {
                           type: 'Identifier',
                           start: 122,
                           end: 129,
-                          loc: SourceLocation {
-                            start: Position { line: 10, column: 13 },
-                            end: Position { line: 10, column: 20 }
+                          loc: SourceLocation2 {
+                            start: Position2 { line: 10, column: 13 },
+                            end: Position2 { line: 10, column: 20 }
                           },
                           name: 'parent2'
                         },
-                        property: Node {
+                        property: Node2 {
                           type: 'Identifier',
                           start: 130,
                           end: 147,
-                          loc: SourceLocation {
-                            start: Position { line: 10, column: 21 },
-                            end: Position { line: 10, column: 38 }
+                          loc: SourceLocation2 {
+                            start: Position2 { line: 10, column: 21 },
+                            end: Position2 { line: 10, column: 38 }
                           },
                           name: 'toLocaleLowerCase'
                         },
@@ -2247,7 +2247,7 @@ Component {
                       dependencies_for_name: Map(0) {}
                     },
                     owner: [Circular *2],
-                    scope: Scope {
+                    scope: Scope$1 {
                       parent: null,
                       block: false,
                       declarations: Map(0) {},
@@ -2296,7 +2296,7 @@ Component {
             dependencies_for_name: Map(0) {}
           },
           owner: [Circular *3],
-          scope: Scope {
+          scope: Scope$1 {
             parent: null,
             block: false,
             declarations: Map(0) {},
@@ -2343,7 +2343,7 @@ Component {
                 dependencies_for_name: Map(0) {}
               },
               owner: [Circular *1],
-              scope: Scope {
+              scope: Scope$1 {
                 parent: null,
                 block: false,
                 declarations: Map(0) {},
@@ -2371,39 +2371,39 @@ Component {
                   contextual_dependencies: Set(0) {},
                   declarations: [],
                   uses_context: false,
-                  node: Node {
+                  node: Node2 {
                     type: 'CallExpression',
                     start: 122,
                     end: 149,
-                    loc: SourceLocation {
-                      start: Position { line: 10, column: 13 },
-                      end: Position { line: 10, column: 40 }
+                    loc: SourceLocation2 {
+                      start: Position2 { line: 10, column: 13 },
+                      end: Position2 { line: 10, column: 40 }
                     },
-                    callee: Node {
+                    callee: Node2 {
                       type: 'MemberExpression',
                       start: 122,
                       end: 147,
-                      loc: SourceLocation {
-                        start: Position { line: 10, column: 13 },
-                        end: Position { line: 10, column: 38 }
+                      loc: SourceLocation2 {
+                        start: Position2 { line: 10, column: 13 },
+                        end: Position2 { line: 10, column: 38 }
                       },
-                      object: Node {
+                      object: Node2 {
                         type: 'Identifier',
                         start: 122,
                         end: 129,
-                        loc: SourceLocation {
-                          start: Position { line: 10, column: 13 },
-                          end: Position { line: 10, column: 20 }
+                        loc: SourceLocation2 {
+                          start: Position2 { line: 10, column: 13 },
+                          end: Position2 { line: 10, column: 20 }
                         },
                         name: 'parent2'
                       },
-                      property: Node {
+                      property: Node2 {
                         type: 'Identifier',
                         start: 130,
                         end: 147,
-                        loc: SourceLocation {
-                          start: Position { line: 10, column: 21 },
-                          end: Position { line: 10, column: 38 }
+                        loc: SourceLocation2 {
+                          start: Position2 { line: 10, column: 21 },
+                          end: Position2 { line: 10, column: 38 }
                         },
                         name: 'toLocaleLowerCase'
                       },
@@ -2420,7 +2420,7 @@ Component {
                     dependencies_for_name: Map(0) {}
                   },
                   owner: [Circular *2],
-                  scope: Scope {
+                  scope: Scope$1 {
                     parent: null,
                     block: false,
                     declarations: Map(0) {},
@@ -2453,13 +2453,13 @@ Component {
               contextual_dependencies: Set(0) {},
               declarations: [],
               uses_context: false,
-              node: Node {
+              node: Node2 {
                 type: 'Identifier',
                 start: 99,
                 end: 106,
-                loc: SourceLocation {
-                  start: Position { line: 8, column: 1 },
-                  end: Position { line: 8, column: 8 }
+                loc: SourceLocation2 {
+                  start: Position2 { line: 8, column: 1 },
+                  end: Position2 { line: 8, column: 8 }
                 },
                 name: 'parent1'
               },
@@ -2470,7 +2470,7 @@ Component {
                 dependencies_for_name: Map(0) {}
               },
               owner: [Circular *4],
-              scope: Scope {
+              scope: Scope$1 {
                 parent: null,
                 block: false,
                 declarations: Map(0) {},
