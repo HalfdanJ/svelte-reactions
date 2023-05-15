@@ -4,7 +4,7 @@
   "author": "Jonas Jongejan",
   "publisher": "halfdanj",
   "license": "MIT",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/halfdanj/svelte-reactive"
@@ -48,6 +48,7 @@
     ]
   },
   "dependencies": {
+    "@vscode/l10n": "^0.0.14",
     "svelte": "^3.59.1"
   }
 }
